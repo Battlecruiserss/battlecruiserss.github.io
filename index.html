@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Bot Developer & Author</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --bg2: #161b22;
+      --bg3: #21262d;
+      --border: #30363d;
+      --text: #e6edf3;
+      --text2: #8b949e;
+      --accent: #58a6ff;
+      --accent2: #3fb950;
+      --accent3: #f78166;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      line-height: 1.7;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; width: 100%;
+      background: rgba(13,17,23,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 32px;
+      display: flex; justify-content: space-between; align-items: center;
+      z-index: 100;
+    }
+    .nav-logo { font-weight: 700; font-size: 1rem; color: var(--accent); letter-spacing: 0.5px; }
+    .lang-btn {
+      background: var(--bg3); border: 1px solid var(--border);
+      color: var(--text2); padding: 5px 14px; border-radius: 6px;
+      cursor: pointer; font-size: 0.82rem; transition: all 0.2s;
+    }
+    .lang-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      text-align: center; padding: 120px 24px 80px;
+    }
+    .hero-tag {
+      display: inline-block;
+      background: rgba(88,166,255,0.1); border: 1px solid rgba(88,166,255,0.3);
+      color: var(--accent); font-size: 0.8rem; padding: 4px 12px; border-radius: 20px;
+      margin-bottom: 24px; letter-spacing: 0.5px;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800; line-height: 1.25;
+      margin-bottom: 20px;
+    }
+    .hero h1 span { color: var(--accent); }
+    .hero-sub {
+      color: var(--text2); font-size: clamp(0.95rem, 2vw, 1.1rem);
+      max-width: 560px; margin-bottom: 48px;
+    }
+
+    /* STATS */
+    .stats {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 16px;
+      margin-bottom: 48px;
+    }
+    .stat-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 10px; padding: 16px 24px; text-align: center; min-width: 120px;
+    }
+    .stat-num { font-size: 1.7rem; font-weight: 800; color: var(--accent); }
+    .stat-label { font-size: 0.78rem; color: var(--text2); margin-top: 2px; }
+
+    .scroll-hint { color: var(--text2); font-size: 0.82rem; animation: bounce 2s infinite; }
+    @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
+
+    /* SECTIONS */
+    section { padding: 80px 24px; max-width: 900px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.78rem; color: var(--accent); letter-spacing: 1px;
+      text-transform: uppercase; margin-bottom: 12px;
+    }
+    h2 { font-size: 1.7rem; font-weight: 700; margin-bottom: 16px; }
+    .section-desc { color: var(--text2); margin-bottom: 40px; max-width: 600px; }
+    hr.divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+    /* TIMELINE */
+    .timeline { position: relative; padding-left: 24px; }
+    .timeline::before {
+      content: ''; position: absolute; left: 0; top: 8px; bottom: 8px;
+      width: 2px; background: var(--border);
+    }
+    .timeline-item { position: relative; margin-bottom: 32px; }
+    .timeline-item::before {
+      content: ''; position: absolute; left: -28px; top: 8px;
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent); border: 2px solid var(--bg);
+    }
+    .timeline-title { font-weight: 600; margin-bottom: 4px; }
+    .timeline-desc { color: var(--text2); font-size: 0.9rem; }
+    .badge {
+      display: inline-block; font-size: 0.72rem; padding: 2px 8px;
+      border-radius: 4px; margin-left: 8px; vertical-align: middle;
+    }
+    .badge-blue { background: rgba(88,166,255,0.15); color: var(--accent); }
+    .badge-green { background: rgba(63,185,80,0.15); color: var(--accent2); }
+
+    /* PRODUCTS */
+    .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+    .product-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 12px; padding: 28px; transition: border-color 0.2s;
+    }
+    .product-card:hover { border-color: var(--accent); }
+    .product-icon { font-size: 2rem; margin-bottom: 16px; }
+    .product-title { font-weight: 700; font-size: 1.05rem; margin-bottom: 8px; }
+    .product-desc { color: var(--text2); font-size: 0.88rem; margin-bottom: 20px; }
+    .product-link {
+      display: inline-block;
+      background: var(--accent); color: var(--bg);
+      padding: 8px 18px; border-radius: 7px; font-size: 0.85rem; font-weight: 600;
+      text-decoration: none; transition: opacity 0.2s;
+    }
+    .product-link:hover { opacity: 0.85; }
+    .product-link.disabled {
+      background: var(--bg3); color: var(--text2); cursor: default;
+    }
+
+    /* WRITING */
+    .writing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+    .writing-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 10px; padding: 20px; text-decoration: none; color: var(--text);
+      transition: border-color 0.2s, transform 0.2s;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .writing-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .writing-platform { font-size: 0.75rem; color: var(--accent); font-weight: 600; letter-spacing: 0.5px; }
+    .writing-title { font-size: 0.9rem; font-weight: 600; }
+    .writing-desc { font-size: 0.8rem; color: var(--text2); }
+
+    /* PLATFORMS */
+    .platform-grid { display: flex; flex-wrap: wrap; gap: 12px; }
+    .platform-btn {
+      background: var(--bg2); border: 1px solid var(--border);
+      color: var(--text2); padding: 10px 20px; border-radius: 8px;
+      text-decoration: none; font-size: 0.88rem; transition: all 0.2s;
+    }
+    .platform-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* FAQ */
+    .faq-list { display: flex; flex-direction: column; }
+    .faq-item { padding: 24px 0; border-bottom: 1px solid var(--border); }
+    .faq-item:first-child { border-top: 1px solid var(--border); }
+    .faq-q { font-weight: 600; margin-bottom: 8px; font-size: 1rem; }
+    .faq-a { color: var(--text2); font-size: 0.9rem; line-height: 1.7; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center; padding: 32px 24px;
+      color: var(--text2); font-size: 0.82rem;
+    }
+
+    /* HIDDEN */
+    [data-ko], [data-en] { display: none; }
+    .lang-ko [data-ko] { display: block; }
+    .lang-en [data-en] { display: block; }
+    .lang-ko [data-ko].inline, .lang-en [data-en].inline { display: inline; }
+    .lang-ko [data-ko].flex, .lang-en [data-en].flex { display: flex; }
+    .lang-ko [data-ko].grid, .lang-en [data-en].grid { display: grid; }
+
+    @media (max-width: 600px) {
+      nav { padding: 12px 16px; }
+      .hero h1 { font-size: 1.7rem; }
+      section { padding: 60px 16px; }
+    }
+  </style>
+</head>
+<body class="lang-ko">
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">⚡ Donovan Seo</div>
+  <button class="lang-btn" onclick="toggleLang()">EN</button>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag" data-ko>직장인 개발자 · 자동매매 봇 · 전자책 작가</div>
+  <div class="hero-tag" data-en>Developer by Night · Algo Trader · Author</div>
+
+  <h1 data-ko>직장 다니면서 만들었습니다.<br><span>지금은 자고 있어도 돌아갑니다.</span></h1>
+  <h1 data-en>Built it while working a day job.<br><span>Now it runs while I sleep.</span></h1>
+
+  <p class="hero-sub" data-ko>v1부터 시작해서 76버전까지.<br>실패하고, 고치고, 다시 만들면서 쌓인 실전 기록입니다.</p>
+  <p class="hero-sub" data-en>From v1 to v76.<br>A real-world record of building, breaking, and rebuilding.</p>
+
+  <div class="stats">
+    <div class="stat-card">
+      <div class="stat-num">76+</div>
+      <div class="stat-label" data-ko>봇 버전</div>
+      <div class="stat-label" data-en>Bot Versions</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">6</div>
+      <div class="stat-label" data-ko>24시간 운영 봇</div>
+      <div class="stat-label" data-en>Bots Running 24/7</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">40만+</div>
+      <div class="stat-label" data-ko>수집 데이터</div>
+      <div class="stat-label" data-en>Data Points Collected</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">2</div>
+      <div class="stat-label" data-ko>출판 전자책</div>
+      <div class="stat-label" data-en>Books Published</div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">↓</div>
+</div>
+
+<hr class="divider">
+
+<!-- STORY -->
+<section>
+  <div class="section-label" data-ko>여정</div>
+  <div class="section-label" data-en>The Journey</div>
+  <h2 data-ko>아무것도 모르는 상태에서 시작했습니다</h2>
+  <h2 data-en>Started With Zero Knowledge</h2>
+  <p class="section-desc" data-ko>코딩을 배운 적도, 트레이딩을 해본 적도 없었어요. 그냥 시작했고, 수십 번 실패했고, 그게 지금의 시스템이 됐습니다.</p>
+  <p class="section-desc" data-en>No coding background. No trading experience. Just started, failed dozens of times, and kept going. That became this system.</p>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-title" data-ko>v1 — 첫 알림이 울리던 날 <span class="badge badge-blue">시작</span></div>
+      <div class="timeline-title" data-en>v1 — The Day the First Alert Fired <span class="badge badge-blue">Start</span></div>
+      <div class="timeline-desc" data-ko>제대로 동작하는지도 몰랐지만, 텔레그램에 메시지가 왔을 때의 그 기분은 아직도 기억해요.</div>
+      <div class="timeline-desc" data-en>Didn't even know if it worked properly. But when the Telegram message came through — that feeling is still with me.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-title" data-ko>6,899건 분석해서 내 봇을 직접 껐습니다 <span class="badge badge-blue">결정</span></div>
+      <div class="timeline-title" data-en>Analyzed 6,899 Cases. Then Shut Down My Own Bot. <span class="badge badge-blue">Decision</span></div>
+      <div class="timeline-desc" data-ko>뉴스가 매매에 도움이 될 것 같아 만들었는데, 데이터를 보니 해킹 뉴스만 플러스였어요. 데이터가 말하면 따라가는 수밖에 없었습니다.</div>
+      <div class="timeline-desc" data-en>Built a news bot thinking it would help trading. The data showed only hack-related news had positive impact. When the data talks, you follow.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-title" data-ko>567건 분석하고 배포하지 않기로 했습니다 <span class="badge badge-blue">보류</span></div>
+      <div class="timeline-title" data-en>Analyzed 567 Cases. Decided Not to Deploy. <span class="badge badge-blue">Held</span></div>
+      <div class="timeline-desc" data-ko>손절이 73%였어요. 만든 기능을 안 쓰는 것도 결정이라는 걸 그때 배웠습니다.</div>
+      <div class="timeline-desc" data-en>Stop-loss rate was 73%. Learned that choosing not to use what you built is also a decision.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-title" data-ko>8,271건 데이터 분석 — 고승률 필터 발견 <span class="badge badge-green">발견</span></div>
+      <div class="timeline-title" data-en>8,271 Data Points — High Win-Rate Filter Discovered <span class="badge badge-green">Discovery</span></div>
+      <div class="timeline-desc" data-ko>데이터가 쌓이면서 패턴이 보이기 시작했어요. 특정 조건에서만 작동하는 필터를 발견했습니다.</div>
+      <div class="timeline-desc" data-en>As data accumulated, patterns emerged. Found a filter that only works under specific conditions — but consistently does.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-title" data-ko>구글 시트가 10M 셀을 넘겼습니다 <span class="badge badge-blue">위기</span></div>
+      <div class="timeline-title" data-en>Google Sheets Hit the 10M Cell Limit <span class="badge badge-blue">Crisis</span></div>
+      <div class="timeline-desc" data-ko>사후추적 열이 정상 40개에서 949개로 폭발했어요. 버그를 찾아서 수동 복구하고, 재발 방지 로직을 3번 갈아치웠습니다. v43, v44, v45 전부 이 문제 때문에 나왔습니다.</div>
+      <div class="timeline-desc" data-en>Tracking columns exploded from the normal 40 to 949. Tracked down the bug, recovered manually, rewrote the prevention logic three times. v43, v44, v45 all shipped because of this one issue.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-title" data-ko>지금 — v76, 6개 봇 동시 운영 중 <span class="badge badge-green">현재</span></div>
+      <div class="timeline-title" data-en>Now — v76, Running 6 Bots Simultaneously <span class="badge badge-green">Present</span></div>
+      <div class="timeline-desc" data-ko>업비트 알림봇, 업비트 M4, 바이낸스, 유튜브봇, 일반뉴스봇, 청산모니터. 맥미니 한 대가 24시간 돌아가고 있습니다.</div>
+      <div class="timeline-desc" data-en>Upbit alert, Upbit M4, Binance, YouTube, General News, and Liquidation Monitor bots. One Mac Mini running 24/7.</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- PRODUCTS -->
+<section>
+  <div class="section-label" data-ko>만든 것들</div>
+  <div class="section-label" data-en>What I Built</div>
+  <h2 data-ko>직접 써보고, 고치고, 만든 것들</h2>
+  <h2 data-en>Built, Used, and Refined</h2>
+  <p class="section-desc" data-ko>팔기 위해 만든 게 아니라, 제가 먼저 쓰려고 만들었습니다.</p>
+  <p class="section-desc" data-en>Not built to sell. Built for myself first.</p>
+
+  <div class="products">
+    <div class="product-card" style="border-color: rgba(88,166,255,0.5); position: relative;">
+      <div style="position:absolute; top:-12px; left:20px; background:var(--bg3); color:var(--text2); font-size:0.72rem; font-weight:700; padding:3px 10px; border-radius:20px;" data-ko>준비 중</div>
+      <div style="position:absolute; top:-12px; left:20px; background:var(--bg3); color:var(--text2); font-size:0.72rem; font-weight:700; padding:3px 10px; border-radius:20px;" data-en>Coming Soon</div>
+      <div class="product-icon">📖</div>
+      <div class="product-title" data-ko>AI 찍먹 실험실 2권</div>
+      <div class="product-title" data-en>AI Lab Chronicles Vol.2</div>
+      <div class="product-desc" data-ko>코딩 몰라도 됩니다. v1부터 v15까지 15번 갈아엎으면서 봇을 만든 실제 기록. 성공담 아닙니다.</div>
+      <div class="product-desc" data-en>No coding required. Real record of building a trading bot — v1 to v15, 15 rebuilds. Not a success story.</div>
+      <a class="product-link disabled" data-ko>준비 중 →</a>
+      <a class="product-link disabled" data-en>Coming Soon →</a>
+    </div>
+    <div class="product-card">
+      <div class="product-icon">🤖</div>
+      <div class="product-title" data-ko>코인 자동매매 봇 시스템</div>
+      <div class="product-title" data-en>Crypto Auto-Trading Bot</div>
+      <div class="product-desc" data-ko>업비트/바이낸스 연동. 76버전에 걸친 실전 데이터 기반. 텔레그램 알림 포함.</div>
+      <div class="product-desc" data-en>Upbit & Binance integrated. Built on real trading data across 76 versions. Telegram alerts included.</div>
+      <a href="[Kmong 링크]" class="product-link disabled" data-ko>크몽에서 보기 →</a>
+      <a href="[Kmong 링크]" class="product-link disabled" data-en>View on Kmong →</a>
+    </div>
+    <div class="product-card">
+      <div class="product-icon">💬</div>
+      <div class="product-title" data-ko>텔레그램 알림봇 제작 서비스</div>
+      <div class="product-title" data-en>Telegram Alert Bot Service</div>
+      <div class="product-desc" data-ko>원하는 조건에 맞춰 텔레그램 알림봇을 직접 만들어드립니다. 76버전 운영 경험 기반. STANDARD · DELUXE · PREMIUM.</div>
+      <div class="product-desc" data-en>Custom Telegram alert bot built to your specs. Based on 76 versions of real-world operation experience.</div>
+      <a href="[Kmong 링크]" class="product-link disabled" data-ko>크몽에서 보기 →</a>
+      <a href="[Kmong 링크]" class="product-link disabled" data-en>View on Kmong →</a>
+    </div>
+    <div class="product-card">
+      <div class="product-icon">📗</div>
+      <div class="product-title" data-ko>AI 찍먹 실험실 3권 (예정)</div>
+      <div class="product-title" data-en>AI Lab Chronicles Vol.3 (Coming)</div>
+      <div class="product-desc" data-ko>8,271건 데이터가 말해준 것들. 봇을 만들고 나서 진짜 일이 시작됐습니다.</div>
+      <div class="product-desc" data-en>What 8,271 data points revealed. The real work started after the bot was built.</div>
+      <a class="product-link disabled" data-ko>출판 알림 받기 →</a>
+      <a class="product-link disabled" data-en>Notify Me →</a>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- FAQ -->
+<section>
+  <div class="section-label" data-ko>자주 묻는 질문</div>
+  <div class="section-label" data-en>FAQ</div>
+  <h2 data-ko>궁금한 것들</h2>
+  <h2 data-en>Common Questions</h2>
+
+  <div class="faq-list">
+    <div class="faq-item">
+      <div class="faq-q" data-ko>코딩을 몰라도 되나요?</div>
+      <div class="faq-q" data-en>Do I need to know how to code?</div>
+      <div class="faq-a" data-ko>저도 처음엔 몰랐습니다. 지금도 전문 개발자 수준은 아닙니다. 필요한 걸 찾아가면서 만든 기록이 전자책에 담겨있습니다.</div>
+      <div class="faq-a" data-en>I didn't know either when I started. Still not a professional developer. The ebook documents exactly how I figured things out along the way.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" data-ko>얼마나 걸렸나요?</div>
+      <div class="faq-q" data-en>How long did it take?</div>
+      <div class="faq-a" data-ko>v1부터 지금까지 계속 고치고 있습니다. 처음 알림이 뜨는 봇을 만드는 건 며칠이면 됩니다. 데이터를 쌓고 다듬는 건 지금도 진행 중입니다.</div>
+      <div class="faq-a" data-en>Still iterating from v1 to now. Getting a basic alert bot running took a few days. Building meaningful data and refining it — still ongoing.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" data-ko>실제로 수익이 나나요?</div>
+      <div class="faq-q" data-en>Is it actually profitable?</div>
+      <div class="faq-a" data-ko>솔직히 말씀드리면, 아직 검증 중입니다. 실전 데이터를 쌓은 지 2달이 됐고, 그 과정을 그대로 공개하고 있습니다.</div>
+      <div class="faq-a" data-en>Honestly — still validating. Two months into collecting real trading data. Sharing the process openly, including the parts that don't work.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" data-ko>전자책은 어떤 내용인가요?</div>
+      <div class="faq-q" data-en>What's in the ebook?</div>
+      <div class="faq-a" data-ko>성공담이 아닙니다. 뭘 만들었고, 왜 실패했고, 어떻게 고쳤는지의 기록입니다. 코딩 경험 없는 직장인이 봇을 만드는 실제 과정입니다.</div>
+      <div class="faq-a" data-en>Not a success story. A record of what I built, why it failed, and how I fixed it. The real process of a non-coder building a trading bot.</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- TELEGRAM CTA -->
+<section style="text-align: center;">
+  <div class="section-label" data-ko>채널 참여</div>
+  <div class="section-label" data-en>Join Channel</div>
+  <h2 data-ko>실험 중인 봇의 데이터를<br>실시간으로 공유합니다</h2>
+  <h2 data-en>Real-Time Bot Data<br>Shared as It Happens</h2>
+  <p class="section-desc" data-ko style="margin: 0 auto 32px;">완성된 결과가 아닙니다. 지금 돌아가고 있는 봇의 실제 기록입니다.</p>
+  <p class="section-desc" data-en style="margin: 0 auto 32px;">Not polished results. Raw records from a bot running right now.</p>
+  <a href="https://t.me/coinbot_diary" target="_blank" class="product-link" data-ko style="font-size: 1rem; padding: 14px 32px; background: var(--accent2);">텔레그램 채널 참여하기 →</a>
+  <a href="https://t.me/coinbot_diary" target="_blank" class="product-link" data-en style="font-size: 1rem; padding: 14px 32px; background: var(--accent2);">Join Telegram Channel →</a>
+</section>
+
+<footer>
+  <p data-ko>실패 기록을 자산으로 만드는 중 · Built in public</p>
+  <p data-en>Turning failure logs into assets · Built in public</p>
+</footer>
+
+<script>
+  function toggleLang() {
+    const body = document.body;
+    const btn = document.querySelector('.lang-btn');
+    if (body.classList.contains('lang-ko')) {
+      body.classList.replace('lang-ko', 'lang-en');
+      btn.textContent = 'KO';
+    } else {
+      body.classList.replace('lang-en', 'lang-ko');
+      btn.textContent = 'EN';
+    }
+  }
+
+  // Set display types for grid/flex elements
+  document.querySelectorAll('[data-ko]').forEach(el => {
+    if (el.classList.contains('products')) el.classList.add('grid');
+    else if (el.classList.contains('stats') || el.classList.contains('platform-grid')) el.classList.add('flex');
+    else if (el.classList.contains('writing-grid')) el.classList.add('grid');
+    else if (el.tagName === 'SPAN') el.classList.add('inline');
+  });
+</script>
+
+</body>
+</html>
