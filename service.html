@@ -116,6 +116,16 @@
     .pricing-tier { font-size: 0.8rem; color: var(--text2); letter-spacing: 1px; margin-bottom: 8px; }
     .pricing-price { font-size: 1.8rem; font-weight: 800; margin-bottom: 4px; }
     .pricing-price span { font-size: 0.9rem; font-weight: 400; color: var(--text2); }
+    .pricing-original {
+      font-size: 0.85rem; color: var(--text2); text-decoration: line-through;
+      margin-bottom: 2px;
+    }
+    .pricing-event-badge {
+      display: inline-block; font-size: 0.72rem; font-weight: 700;
+      background: rgba(247,129,102,0.15); color: var(--accent3);
+      border: 1px solid rgba(247,129,102,0.3);
+      padding: 2px 8px; border-radius: 4px; margin-bottom: 6px;
+    }
     .pricing-desc { color: var(--text2); font-size: 0.85rem; margin: 16px 0; flex: 1; }
     .pricing-features { list-style: none; margin-bottom: 24px; }
     .pricing-features li {
@@ -239,6 +249,8 @@
   <div class="pricing-grid">
     <div class="pricing-card">
       <div class="pricing-tier">STANDARD</div>
+      <div class="pricing-event-badge">🎉 런칭 이벤트</div>
+      <div class="pricing-original">정가 50,000원</div>
       <div class="pricing-price">30,000<span>원~</span></div>
       <div class="pricing-desc">정적 웹사이트 키워드 감지, 코인 가격 도달 알림 등 기본 조건의 알림봇</div>
       <ul class="pricing-features">
