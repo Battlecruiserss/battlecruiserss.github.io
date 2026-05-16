@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Bot Developer & Author</title>
+  <title>텔레그램 알림봇 제작 | Donovan Seo</title>
   <style>
     :root {
       --bg: #0d1117;
@@ -90,69 +90,66 @@
     .section-desc { color: var(--text2); margin-bottom: 40px; max-width: 600px; }
     hr.divider { border: none; border-top: 1px solid var(--border); margin: 0; }
 
-    /* TIMELINE */
-    .timeline { position: relative; padding-left: 24px; }
-    .timeline::before {
-      content: ''; position: absolute; left: 0; top: 8px; bottom: 8px;
-      width: 2px; background: var(--border);
+    /* PROOF CARDS */
+    .proof-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
     }
-    .timeline-item { position: relative; margin-bottom: 32px; }
-    .timeline-item::before {
-      content: ''; position: absolute; left: -28px; top: 8px;
-      width: 8px; height: 8px; border-radius: 50%;
-      background: var(--accent); border: 2px solid var(--bg);
-    }
-    .timeline-title { font-weight: 600; margin-bottom: 4px; }
-    .timeline-desc { color: var(--text2); font-size: 0.9rem; }
-    .badge {
-      display: inline-block; font-size: 0.72rem; padding: 2px 8px;
-      border-radius: 4px; margin-left: 8px; vertical-align: middle;
-    }
-    .badge-blue { background: rgba(88,166,255,0.15); color: var(--accent); }
-    .badge-green { background: rgba(63,185,80,0.15); color: var(--accent2); }
-
-    /* PRODUCTS */
-    .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
-    .product-card {
+    .proof-card {
       background: var(--bg2); border: 1px solid var(--border);
-      border-radius: 12px; padding: 28px; transition: border-color 0.2s;
+      border-radius: 12px; padding: 28px;
     }
-    .product-card:hover { border-color: var(--accent); }
-    .product-icon { font-size: 2rem; margin-bottom: 16px; }
-    .product-title { font-weight: 700; font-size: 1.05rem; margin-bottom: 8px; }
-    .product-desc { color: var(--text2); font-size: 0.88rem; margin-bottom: 20px; }
-    .product-link {
-      display: inline-block;
+    .proof-icon { font-size: 1.4rem; margin-bottom: 12px; }
+    .proof-title { font-weight: 700; font-size: 1rem; margin-bottom: 8px; }
+    .proof-desc { color: var(--text2); font-size: 0.88rem; line-height: 1.6; }
+    .proof-data {
+      display: inline-block; margin-top: 12px;
+      font-size: 0.78rem; color: var(--accent);
+      background: rgba(88,166,255,0.1); border: 1px solid rgba(88,166,255,0.2);
+      padding: 3px 10px; border-radius: 4px;
+    }
+
+    /* PRICING */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .pricing-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 12px; padding: 28px; display: flex; flex-direction: column;
+      transition: border-color 0.2s;
+    }
+    .pricing-card:hover { border-color: var(--accent); }
+    .pricing-card.featured { border-color: var(--accent); position: relative; }
+    .pricing-badge {
+      position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
       background: var(--accent); color: var(--bg);
-      padding: 8px 18px; border-radius: 7px; font-size: 0.85rem; font-weight: 600;
-      text-decoration: none; transition: opacity 0.2s;
+      font-size: 0.72rem; font-weight: 700; padding: 3px 12px; border-radius: 20px;
     }
-    .product-link:hover { opacity: 0.85; }
-    .product-link.disabled {
-      background: var(--bg3); color: var(--text2); cursor: default;
+    .pricing-tier { font-size: 0.8rem; color: var(--text2); letter-spacing: 1px; margin-bottom: 8px; }
+    .pricing-price { font-size: 1.8rem; font-weight: 800; margin-bottom: 4px; }
+    .pricing-price span { font-size: 0.9rem; font-weight: 400; color: var(--text2); }
+    .pricing-desc { color: var(--text2); font-size: 0.85rem; margin: 16px 0; flex: 1; }
+    .pricing-features { list-style: none; margin-bottom: 24px; }
+    .pricing-features li {
+      font-size: 0.85rem; color: var(--text2); padding: 4px 0;
+      display: flex; gap: 8px; align-items: flex-start;
     }
-
-    /* WRITING */
-    .writing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
-    .writing-card {
-      background: var(--bg2); border: 1px solid var(--border);
-      border-radius: 10px; padding: 20px; text-decoration: none; color: var(--text);
-      transition: border-color 0.2s, transform 0.2s;
-      display: flex; flex-direction: column; gap: 8px;
+    .pricing-features li::before { content: '✓'; color: var(--accent2); flex-shrink: 0; }
+    .pricing-cta {
+      display: block; text-align: center;
+      background: var(--bg3); border: 1px solid var(--border);
+      color: var(--text2); padding: 10px 0; border-radius: 7px;
+      font-size: 0.85rem; font-weight: 600; text-decoration: none;
+      transition: all 0.2s; cursor: pointer;
     }
-    .writing-card:hover { border-color: var(--accent); transform: translateY(-2px); }
-    .writing-platform { font-size: 0.75rem; color: var(--accent); font-weight: 600; letter-spacing: 0.5px; }
-    .writing-title { font-size: 0.9rem; font-weight: 600; }
-    .writing-desc { font-size: 0.8rem; color: var(--text2); }
-
-    /* PLATFORMS */
-    .platform-grid { display: flex; flex-wrap: wrap; gap: 12px; }
-    .platform-btn {
-      background: var(--bg2); border: 1px solid var(--border);
-      color: var(--text2); padding: 10px 20px; border-radius: 8px;
-      text-decoration: none; font-size: 0.88rem; transition: all 0.2s;
+    .pricing-cta:hover { border-color: var(--accent); color: var(--accent); }
+    .pricing-cta.primary {
+      background: var(--accent); color: var(--bg); border-color: var(--accent);
     }
-    .platform-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .pricing-cta.primary:hover { opacity: 0.85; }
 
     /* FAQ */
     .faq-list { display: flex; flex-direction: column; }
@@ -160,6 +157,26 @@
     .faq-item:first-child { border-top: 1px solid var(--border); }
     .faq-q { font-weight: 600; margin-bottom: 8px; font-size: 1rem; }
     .faq-a { color: var(--text2); font-size: 0.9rem; line-height: 1.7; }
+
+    /* CTA SECTION */
+    .cta-buttons {
+      display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;
+      margin-top: 32px;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: var(--accent); color: var(--bg);
+      padding: 14px 32px; border-radius: 7px; font-size: 1rem; font-weight: 700;
+      text-decoration: none; transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-secondary {
+      display: inline-block;
+      background: transparent; border: 1px solid var(--border);
+      color: var(--text2); padding: 14px 32px; border-radius: 7px;
+      font-size: 1rem; font-weight: 600; text-decoration: none; transition: all 0.2s;
+    }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
 
     /* FOOTER */
     footer {
@@ -193,14 +210,14 @@
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-tag" data-ko>직장인 개발자 · 자동매매 봇 · 전자책 작가</div>
-  <div class="hero-tag" data-en>Developer by Night · Algo Trader · Author</div>
+  <div class="hero-tag" data-ko>텔레그램 알림봇 제작 서비스</div>
+  <div class="hero-tag" data-en>Custom Telegram Alert Bot</div>
 
-  <h1 data-ko>직장 다니면서 만들었습니다.<br><span>지금은 자고 있어도 돌아갑니다.</span></h1>
-  <h1 data-en>Built it while working a day job.<br><span>Now it runs while I sleep.</span></h1>
+  <h1 data-ko>원하는 조건에 알림이 오면<br><span>놓치는 게 없어집니다.</span></h1>
+  <h1 data-en>When alerts come on your terms,<br><span>nothing slips through.</span></h1>
 
-  <p class="hero-sub" data-ko>v1부터 시작해서 76버전까지.<br>실패하고, 고치고, 다시 만들면서 쌓인 실전 기록입니다.</p>
-  <p class="hero-sub" data-en>From v1 to v76.<br>A real-world record of building, breaking, and rebuilding.</p>
+  <p class="hero-sub" data-ko>76버전 실전 운영 경험 기반. 코인 가격, 웹사이트 변동, 키워드 감지 — 원하는 조건을 말씀해주시면 직접 만들어드립니다.</p>
+  <p class="hero-sub" data-en>76 versions of real-world bot experience. Crypto prices, site changes, keyword triggers — tell me what you need, I'll build it.</p>
 
   <div class="stats">
     <div class="stat-card">
@@ -209,19 +226,19 @@
       <div class="stat-label" data-en>Bot Versions</div>
     </div>
     <div class="stat-card">
+      <div class="stat-num">15,000+</div>
+      <div class="stat-label" data-ko>직접 분석한 케이스</div>
+      <div class="stat-label" data-en>Cases Analyzed</div>
+    </div>
+    <div class="stat-card">
       <div class="stat-num">7</div>
-      <div class="stat-label" data-ko>24시간 운영 봇</div>
-      <div class="stat-label" data-en>Bots Running 24/7</div>
+      <div class="stat-label" data-ko>현재 운영 중인 봇</div>
+      <div class="stat-label" data-en>Bots Running Now</div>
     </div>
     <div class="stat-card">
-      <div class="stat-num">50만+</div>
-      <div class="stat-label" data-ko>수집 데이터</div>
-      <div class="stat-label" data-en>Data Points Collected</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-num">2</div>
-      <div class="stat-label" data-ko>출판 전자책</div>
-      <div class="stat-label" data-en>Books Published</div>
+      <div class="stat-num">3만~</div>
+      <div class="stat-label" data-ko>시작 가격</div>
+      <div class="stat-label" data-en>Starting Price</div>
     </div>
   </div>
 
@@ -230,75 +247,158 @@
 
 <hr class="divider">
 
-<!-- STORY -->
+<!-- WHY ME -->
 <section>
-  <div class="section-label" data-ko>여정</div>
-  <div class="section-label" data-en>The Journey</div>
-  <h2 data-ko>아무것도 모르는 상태에서 시작했습니다</h2>
-  <h2 data-en>Started With Zero Knowledge</h2>
-  <p class="section-desc" data-ko>코딩을 배운 적도, 트레이딩을 해본 적도 없었어요. 그냥 시작했고, 수십 번 실패했고, 그게 지금의 시스템이 됐습니다.</p>
-  <p class="section-desc" data-en>No coding background. No trading experience. Just started, failed dozens of times, and kept going. That became this system.</p>
+  <div class="section-label" data-ko>신뢰 근거</div>
+  <div class="section-label" data-en>Why Trust Me</div>
+  <h2 data-ko>대충 만들지 않는다는 증거입니다</h2>
+  <h2 data-en>Evidence I Don't Cut Corners</h2>
+  <p class="section-desc" data-ko>직접 돈을 걸고 운영하는 봇을 만들어온 사람입니다. 결과가 나쁘면 멈추고, 문제가 생기면 끝까지 파고듭니다.</p>
+  <p class="section-desc" data-en>I build bots that run with real money on the line. When results are bad, I stop. When something breaks, I dig until it's fixed.</p>
 
-  <div class="timeline">
-    <div class="timeline-item">
-      <div class="timeline-title" data-ko>v1 — 첫 알림이 울리던 날 <span class="badge badge-blue">시작</span></div>
-      <div class="timeline-title" data-en>v1 — The Day the First Alert Fired <span class="badge badge-blue">Start</span></div>
-      <div class="timeline-desc" data-ko>제대로 동작하는지도 몰랐지만, 텔레그램에 메시지가 왔을 때의 그 기분은 아직도 기억해요.</div>
-      <div class="timeline-desc" data-en>Didn't even know if it worked properly. But when the Telegram message came through — that feeling is still with me.</div>
+  <div class="proof-grid" data-ko>
+    <div class="proof-card">
+      <div class="proof-icon">📊</div>
+      <div class="proof-title">데이터 없이 배포하지 않습니다</div>
+      <div class="proof-desc">뉴스가 매매에 도움이 될 것 같아 봇을 만들었습니다. 직접 분석해보니 해킹 뉴스만 유의미했습니다. 데이터가 나쁘면 내 봇이라도 끕니다.</div>
+      <span class="proof-data">6,899건 분석 → 봇 직접 폐기</span>
     </div>
-    <div class="timeline-item">
-      <div class="timeline-title" data-ko>6,899건 분석해서 내 봇을 직접 껐습니다 <span class="badge badge-blue">결정</span></div>
-      <div class="timeline-title" data-en>Analyzed 6,899 Cases. Then Shut Down My Own Bot. <span class="badge badge-blue">Decision</span></div>
-      <div class="timeline-desc" data-ko>뉴스가 매매에 도움이 될 것 같아 만들었는데, 데이터를 보니 해킹 뉴스만 플러스였어요. 데이터가 말하면 따라가는 수밖에 없었습니다.</div>
-      <div class="timeline-desc" data-en>Built a news bot thinking it would help trading. The data showed only hack-related news had positive impact. When the data talks, you follow.</div>
+    <div class="proof-card">
+      <div class="proof-icon">🚫</div>
+      <div class="proof-title">안 된다고 말할 수 있습니다</div>
+      <div class="proof-desc">만든 기능을 배포하지 않은 적도 있습니다. 손절률이 73%였기 때문입니다. 클라이언트에게도 동일하게 적용됩니다 — 가능 여부를 먼저 솔직하게 말씀드립니다.</div>
+      <span class="proof-data">567건 분석 → 배포 보류 결정</span>
     </div>
-    <div class="timeline-item">
-      <div class="timeline-title" data-ko>567건 분석하고 배포하지 않기로 했습니다 <span class="badge badge-blue">보류</span></div>
-      <div class="timeline-title" data-en>Analyzed 567 Cases. Decided Not to Deploy. <span class="badge badge-blue">Held</span></div>
-      <div class="timeline-desc" data-ko>손절이 73%였어요. 만든 기능을 안 쓰는 것도 결정이라는 걸 그때 배웠습니다.</div>
-      <div class="timeline-desc" data-en>Stop-loss rate was 73%. Learned that choosing not to use what you built is also a decision.</div>
+    <div class="proof-card">
+      <div class="proof-icon">🔧</div>
+      <div class="proof-title">문제가 생기면 끝까지 잡습니다</div>
+      <div class="proof-desc">구글 시트가 1,000만 셀을 넘기는 버그가 발생했을 때, 원인을 찾아서 재발 방지 로직을 3번 갈아치웠습니다. v43, v44, v45 전부 이 하나의 문제 때문에 나왔습니다.</div>
+      <span class="proof-data">버그 추적 → 3버전 연속 개선</span>
     </div>
-    <div class="timeline-item">
-      <div class="timeline-title" data-ko>8,271건 데이터 분석 — 고승률 필터 발견 <span class="badge badge-green">발견</span></div>
-      <div class="timeline-title" data-en>8,271 Data Points — High Win-Rate Filter Discovered <span class="badge badge-green">Discovery</span></div>
-      <div class="timeline-desc" data-ko>데이터가 쌓이면서 패턴이 보이기 시작했어요. 특정 조건에서만 작동하는 필터를 발견했습니다.</div>
-      <div class="timeline-desc" data-en>As data accumulated, patterns emerged. Found a filter that only works under specific conditions — but consistently does.</div>
+    <div class="proof-card">
+      <div class="proof-icon">⚙️</div>
+      <div class="proof-title">직접 쓰는 봇을 만드는 사람입니다</div>
+      <div class="proof-desc">지금도 맥미니 한 대에서 7개 봇이 24시간 돌아가고 있습니다. 운영하면서 생기는 문제를 직접 겪기 때문에, 납품하고 끝나는 구조를 만들지 않습니다.</div>
+      <span class="proof-data">v1 → v76, 현재도 운영 중</span>
     </div>
-    <div class="timeline-item">
-      <div class="timeline-title" data-ko>구글 시트가 10M 셀을 넘겼습니다 <span class="badge badge-blue">위기</span></div>
-      <div class="timeline-title" data-en>Google Sheets Hit the 10M Cell Limit <span class="badge badge-blue">Crisis</span></div>
-      <div class="timeline-desc" data-ko>사후추적 열이 정상 40개에서 949개로 폭발했어요. 버그를 찾아서 수동 복구하고, 재발 방지 로직을 3번 갈아치웠습니다. v43, v44, v45 전부 이 문제 때문에 나왔습니다.</div>
-      <div class="timeline-desc" data-en>Tracking columns exploded from the normal 40 to 949. Tracked down the bug, recovered manually, rewrote the prevention logic three times. v43, v44, v45 all shipped because of this one issue.</div>
+  </div>
+
+  <div class="proof-grid" data-en>
+    <div class="proof-card">
+      <div class="proof-icon">📊</div>
+      <div class="proof-title">No deployment without data</div>
+      <div class="proof-desc">Built a news bot thinking it would help trading. Analyzed the data — only hack news was meaningful. If the numbers are bad, I shut it down even if it's my own bot.</div>
+      <span class="proof-data">6,899 cases analyzed → bot shut down</span>
     </div>
-    <div class="timeline-item">
-      <div class="timeline-title" data-ko>지금 — v76, 7개 봇 동시 운영 중 <span class="badge badge-green">현재</span></div>
-      <div class="timeline-title" data-en>Now — v76, Running 7 Bots Simultaneously <span class="badge badge-green">Present</span></div>
-      <div class="timeline-desc" data-ko>업비트 알림봇, 업비트 M4, 바이낸스, 유튜브봇, 일반뉴스봇, 청산모니터, 모니터봇. 맥미니 한 대가 24시간 돌아가고 있습니다.</div>
-      <div class="timeline-desc" data-en>Upbit alert, Upbit M4, Binance, YouTube, General News, Liquidation Monitor, and Monitor bots. One Mac Mini running 24/7.</div>
+    <div class="proof-card">
+      <div class="proof-icon">🚫</div>
+      <div class="proof-title">I can say it won't work</div>
+      <div class="proof-desc">I've built things and decided not to deploy them. Stop-loss rate was 73%. Same principle applies to clients — I'll tell you honestly if something isn't feasible before we start.</div>
+      <span class="proof-data">567 cases → deployment held</span>
+    </div>
+    <div class="proof-card">
+      <div class="proof-icon">🔧</div>
+      <div class="proof-title">I chase bugs until they're gone</div>
+      <div class="proof-desc">When a bug caused Google Sheets to hit the 10M cell limit, I traced the root cause and rewrote the prevention logic three times. v43, v44, v45 all shipped because of one bug.</div>
+      <span class="proof-data">3 consecutive versions to fix one bug</span>
+    </div>
+    <div class="proof-card">
+      <div class="proof-icon">⚙️</div>
+      <div class="proof-title">I run the bots I build</div>
+      <div class="proof-desc">Right now, 7 bots are running 24/7 on a single Mac Mini. Because I operate them myself, I don't build things that break after delivery and can't be maintained.</div>
+      <span class="proof-data">v1 → v76, still running today</span>
     </div>
   </div>
 </section>
 
 <hr class="divider">
 
-<!-- PRODUCTS -->
+<!-- PRICING -->
 <section>
   <div class="section-label" data-ko>서비스</div>
-  <div class="section-label" data-en>Service</div>
+  <div class="section-label" data-en>Services</div>
   <h2 data-ko>텔레그램 알림봇 제작</h2>
   <h2 data-en>Telegram Alert Bot</h2>
-  <p class="section-desc" data-ko>원하는 조건에 맞춰 텔레그램 알림봇을 직접 만들어드립니다.</p>
-  <p class="section-desc" data-en>Custom Telegram alert bot built to your specs.</p>
+  <p class="section-desc" data-ko>원하는 조건을 말씀해주시면, 텔레그램으로 즉시 알림이 오는 봇을 만들어드립니다. 주문 전 가능 여부 먼저 확인해드립니다.</p>
+  <p class="section-desc" data-en>Describe what you want to be alerted about. I'll build it. Feasibility check before ordering — no surprises.</p>
 
-  <div style="max-width: 320px;">
-    <div class="product-card">
-      <div class="product-icon">💬</div>
-      <div class="product-title" data-ko>텔레그램 알림봇 제작 서비스</div>
-      <div class="product-title" data-en>Telegram Alert Bot Service</div>
-      <div class="product-desc" data-ko>원하는 조건에 맞춰 텔레그램 알림봇을 직접 만들어드립니다. 76버전 운영 경험 기반. STANDARD · DELUXE · PREMIUM.</div>
-      <div class="product-desc" data-en>Custom Telegram alert bot built to your specs. Based on 76 versions of real-world operation experience.</div>
-      <a class="product-link disabled" data-ko>준비 중 →</a>
-      <a class="product-link disabled" data-en>Coming Soon →</a>
+  <div class="pricing-grid" data-ko>
+    <div class="pricing-card">
+      <div class="pricing-tier">STANDARD</div>
+      <div class="pricing-price">30,000<span>원~</span></div>
+      <div class="pricing-desc">정적 웹사이트 키워드 감지, 코인 가격 도달 알림 등 기본 조건의 알림봇</div>
+      <ul class="pricing-features">
+        <li>단일 조건 알림</li>
+        <li>정적 사이트 모니터링</li>
+        <li>텔레그램 메시지 전송</li>
+        <li>납기 3~5일</li>
+      </ul>
+      <a href="https://t.me/coinbot_diary" target="_blank" class="pricing-cta">문의하기 →</a>
+    </div>
+    <div class="pricing-card featured">
+      <div class="pricing-badge">인기</div>
+      <div class="pricing-tier">DELUXE</div>
+      <div class="pricing-price">200,000<span>원~</span></div>
+      <div class="pricing-desc">JavaScript로 렌더링되는 사이트, 로그인 필요 페이지, 복수 채널 알림봇</div>
+      <ul class="pricing-features">
+        <li>JS 렌더링 사이트 지원</li>
+        <li>복수 조건/채널 설정</li>
+        <li>알림 주기 맞춤 설정</li>
+        <li>납기 5~7일</li>
+      </ul>
+      <a href="https://t.me/coinbot_diary" target="_blank" class="pricing-cta primary">문의하기 →</a>
+    </div>
+    <div class="pricing-card">
+      <div class="pricing-tier">PREMIUM</div>
+      <div class="pricing-price">500,000<span>원~</span></div>
+      <div class="pricing-desc">복합 조건 처리, API 연동, 데이터 수집·분석 포함 맞춤 봇</div>
+      <ul class="pricing-features">
+        <li>복합 로직 맞춤 설계</li>
+        <li>API/데이터베이스 연동</li>
+        <li>운영 후 수정 대응 포함</li>
+        <li>납기 협의</li>
+      </ul>
+      <a href="https://t.me/coinbot_diary" target="_blank" class="pricing-cta">문의하기 →</a>
+    </div>
+  </div>
+
+  <div class="pricing-grid" data-en>
+    <div class="pricing-card">
+      <div class="pricing-tier">STANDARD</div>
+      <div class="pricing-price">₩30,000<span>+</span></div>
+      <div class="pricing-desc">Keyword monitoring on static sites, crypto price alerts, and basic condition bots</div>
+      <ul class="pricing-features">
+        <li>Single condition alert</li>
+        <li>Static site monitoring</li>
+        <li>Telegram message delivery</li>
+        <li>Delivery in 3–5 days</li>
+      </ul>
+      <a href="https://t.me/coinbot_diary" target="_blank" class="pricing-cta">Inquire →</a>
+    </div>
+    <div class="pricing-card featured">
+      <div class="pricing-badge">Popular</div>
+      <div class="pricing-tier">DELUXE</div>
+      <div class="pricing-price">₩200,000<span>+</span></div>
+      <div class="pricing-desc">JS-rendered sites, login-required pages, multi-channel alert bots</div>
+      <ul class="pricing-features">
+        <li>JS rendering support</li>
+        <li>Multiple conditions/channels</li>
+        <li>Custom alert intervals</li>
+        <li>Delivery in 5–7 days</li>
+      </ul>
+      <a href="https://t.me/coinbot_diary" target="_blank" class="pricing-cta primary">Inquire →</a>
+    </div>
+    <div class="pricing-card">
+      <div class="pricing-tier">PREMIUM</div>
+      <div class="pricing-price">₩500,000<span>+</span></div>
+      <div class="pricing-desc">Complex logic, API integrations, data collection and analysis bots</div>
+      <ul class="pricing-features">
+        <li>Custom multi-condition logic</li>
+        <li>API/database integration</li>
+        <li>Post-delivery support</li>
+        <li>Timeline by agreement</li>
+      </ul>
+      <a href="https://t.me/coinbot_diary" target="_blank" class="pricing-cta">Inquire →</a>
     </div>
   </div>
 </section>
@@ -314,44 +414,49 @@
 
   <div class="faq-list">
     <div class="faq-item">
-      <div class="faq-q" data-ko>텔레그램 알림봇 제작 서비스는 어떤 건가요?</div>
-      <div class="faq-q" data-en>What is the Telegram alert bot service?</div>
-      <div class="faq-a" data-ko>코인 가격, 웹사이트 변동, 특정 키워드 등 원하는 조건이 충족되면 텔레그램으로 즉시 알림을 받아보는 봇을 만들어드립니다. 직접 76버전 넘게 운영하면서 쌓은 경험 기반입니다.</div>
-      <div class="faq-a" data-en>I build Telegram bots that alert you when your conditions are met — price movements, website changes, keyword triggers, and more. Based on hands-on experience running bots across 76+ versions.</div>
+      <div class="faq-q" data-ko>어떤 알림봇을 만들어드릴 수 있나요?</div>
+      <div class="faq-q" data-en>What kinds of bots can you build?</div>
+      <div class="faq-a" data-ko>코인 가격 도달/급등 감지, 웹사이트 텍스트 변동 감지, 특정 키워드 등장, 재고 알림, 공지 변경 감지 등 텔레그램으로 받고 싶은 알림이라면 대부분 가능합니다. 요청 내용을 먼저 말씀해주시면 가능 여부를 확인해드립니다.</div>
+      <div class="faq-a" data-en>Crypto price/pump alerts, website text changes, keyword detection, stock/inventory notifications, announcement monitoring — most alert use cases are possible. Send me what you have in mind and I'll confirm feasibility.</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q" data-ko>어떤 알림 조건이 가능한가요?</div>
-      <div class="faq-q" data-en>What kinds of alerts are possible?</div>
-      <div class="faq-a" data-ko>코인 펌프 감지, 웹사이트 키워드 변동, 가격 도달 알림 등 다양한 조건이 가능합니다. STANDARD(기본 키워드 감지) · DELUXE(JS 렌더링 필요 사이트) · PREMIUM(맞춤 복합 조건) 패키지로 구성됩니다. 주문 전 가능 여부 먼저 확인해드립니다.</div>
-      <div class="faq-a" data-en>Crypto pump detection, website keyword changes, price alerts, and more. Available in STANDARD (basic keyword monitoring) · DELUXE (JS-rendered sites) · PREMIUM (custom complex conditions). Check feasibility before ordering.</div>
+      <div class="faq-q" data-ko>납기는 얼마나 걸리나요?</div>
+      <div class="faq-q" data-en>How long does delivery take?</div>
+      <div class="faq-a" data-ko>STANDARD는 3~5일, DELUXE는 5~7일이 기준입니다. 복잡도에 따라 달라질 수 있고, 주문 전 미리 안내해드립니다. 급한 경우에는 문의 시 말씀해주세요.</div>
+      <div class="faq-a" data-en>STANDARD: 3–5 days. DELUXE: 5–7 days. Varies by complexity — I'll give you a clear estimate before you order. Let me know if timing is urgent.</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q" data-ko>실제로 수익이 나나요?</div>
-      <div class="faq-q" data-en>Is it actually profitable?</div>
-      <div class="faq-a" data-ko>솔직히 말씀드리면, 아직 검증 중입니다. 실전 데이터를 쌓은 지 3개월이 넘었고, 그 과정을 그대로 공개하고 있습니다.</div>
-      <div class="faq-a" data-en>Honestly — still validating. Over three months into collecting real trading data. Sharing the process openly, including the parts that don't work.</div>
+      <div class="faq-q" data-ko>납품 후 수정이나 유지보수는 어떻게 되나요?</div>
+      <div class="faq-q" data-en>What about post-delivery support?</div>
+      <div class="faq-a" data-ko>납품 후 7일 이내 발생하는 기능 오류는 무상으로 수정합니다. 이후 추가 기능 요청이나 조건 변경은 별도 협의입니다. PREMIUM 패키지는 초기 운영 안정화 기간 수정 대응을 포함합니다.</div>
+      <div class="faq-a" data-en>Functional bugs within 7 days of delivery are fixed at no cost. Feature additions or condition changes after that are negotiated separately. PREMIUM includes support during the initial stabilization period.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q" data-ko>코딩을 몰라도 의뢰할 수 있나요?</div>
       <div class="faq-q" data-en>Can I use the service without coding knowledge?</div>
-      <div class="faq-a" data-ko>네. 원하는 조건을 말로 설명해주시면 됩니다. 저도 처음엔 코딩을 몰랐습니다. 어떤 상황에서 알림이 필요한지만 알려주시면 됩니다.</div>
-      <div class="faq-a" data-en>Yes. Just describe what you want in plain language. I started with no coding background myself. Tell me what situation you want to be alerted about — that's all I need.</div>
+      <div class="faq-a" data-ko>네. "어떤 상황에서 텔레그램 알림이 오면 좋겠다"는 것만 말씀해주시면 됩니다. 기술적인 내용은 전부 제가 처리합니다. 저도 처음엔 코딩을 몰랐습니다.</div>
+      <div class="faq-a" data-en>Yes. Just tell me the situation where you'd want a Telegram alert. I handle everything technical. I started with no coding background myself.</div>
     </div>
   </div>
 </section>
 
 <hr class="divider">
 
-<!-- TELEGRAM CTA -->
+<!-- CTA -->
 <section style="text-align: center;">
-  <div class="section-label" data-ko>채널 참여</div>
-  <div class="section-label" data-en>Join Channel</div>
-  <h2 data-ko>실험 중인 봇의 데이터를<br>실시간으로 공유합니다</h2>
-  <h2 data-en>Real-Time Bot Data<br>Shared as It Happens</h2>
-  <p class="section-desc" data-ko style="margin: 0 auto 32px;">완성된 결과가 아닙니다. 지금 돌아가고 있는 봇의 실제 기록입니다.</p>
-  <p class="section-desc" data-en style="margin: 0 auto 32px;">Not polished results. Raw records from a bot running right now.</p>
-  <a href="https://t.me/coinbot_diary" target="_blank" class="product-link" data-ko style="font-size: 1rem; padding: 14px 32px; background: var(--accent2);">텔레그램 채널 참여하기 →</a>
-  <a href="https://t.me/coinbot_diary" target="_blank" class="product-link" data-en style="font-size: 1rem; padding: 14px 32px; background: var(--accent2);">Join Telegram Channel →</a>
+  <div class="section-label" data-ko>문의</div>
+  <div class="section-label" data-en>Get in Touch</div>
+  <h2 data-ko>어떤 알림이 필요하신가요?</h2>
+  <h2 data-en>What do you want to be alerted about?</h2>
+  <p class="section-desc" data-ko style="margin: 0 auto 0;">원하는 조건을 텔레그램으로 보내주세요. 가능 여부와 예상 가격을 먼저 확인해드립니다.</p>
+  <p class="section-desc" data-en style="margin: 0 auto 0;">Send me what you want to monitor. I'll check feasibility and give you a price estimate before anything else.</p>
+
+  <div class="cta-buttons">
+    <a href="https://t.me/coinbot_diary" target="_blank" class="btn-primary" data-ko>텔레그램으로 문의하기 →</a>
+    <a href="https://t.me/coinbot_diary" target="_blank" class="btn-primary" data-en>Message on Telegram →</a>
+    <a href="https://t.me/coinbot_diary" target="_blank" class="btn-secondary" data-ko>봇 운영 기록 채널 보기</a>
+    <a href="https://t.me/coinbot_diary" target="_blank" class="btn-secondary" data-en>View Bot Activity Channel</a>
+  </div>
 </section>
 
 <footer>
@@ -372,11 +477,9 @@
     }
   }
 
-  // Set display types for grid/flex elements
   document.querySelectorAll('[data-ko]').forEach(el => {
-    if (el.classList.contains('products')) el.classList.add('grid');
-    else if (el.classList.contains('stats') || el.classList.contains('platform-grid')) el.classList.add('flex');
-    else if (el.classList.contains('writing-grid')) el.classList.add('grid');
+    if (el.classList.contains('proof-grid') || el.classList.contains('pricing-grid')) el.classList.add('grid');
+    else if (el.classList.contains('stats') || el.classList.contains('cta-buttons')) el.classList.add('flex');
     else if (el.tagName === 'SPAN') el.classList.add('inline');
   });
 </script>
